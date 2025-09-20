@@ -1,0 +1,4 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu-22.04 --exec /bin/bash -c "export PATH=\"\usr\bin:$PATH\" && export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /home/hu_chenfan/workfiles/Algorithm/cmake-build-debug-wsl && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/gmake -DCMAKE_C_COMPILER=/usr/bin/gcc '-DCMAKE_CXX_COMPILER=/usr/bin/g++' -G 'CodeBlocks - Unix Makefiles' -S /home/hu_chenfan/workfiles/Algorithm -B /home/hu_chenfan/workfiles/Algorithm/cmake-build-debug-wsl"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hu_chenfan/workfiles/Algorithm/cmake-build-debug-wsl
