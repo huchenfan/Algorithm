@@ -21,6 +21,75 @@ BFS总结：
                 双向BFS时间复杂度：
                     O( 2 * q^(k/2) ) 其中q为树的平均分支， k是树的高度
         2. 康托压缩
-            针对总样本为阶乘，且个体为排列的数据时
-                eg:
-                    八数码&魔板
+            把「排列 → 唯一整数」 的映射技巧， 常用于 排列哈希、状态压缩 DP、博弈论状态判重。
+            ✅ 一句话理解
+            「把 1~n 的排列压成 0~(n!-1) 的唯一整数。」
+            代码：
+                1. 从 排列 --> 整数
+                    #include <vector>
+                    using namespace std;
+
+                    // 将排列（可以用数组存，也可以用string存）转换成整数
+                    long long cantor(const vector<int>& a) {
+                        int n = a.size();
+                        long long rank = 0;
+                        for (int i = 0; i < n; ++i) {
+                            int cnt = 0;
+                            for (int j = i + 1; j < n; ++j)
+                                if (a[j] < a[i]) ++cnt;
+                            rank += cnt * factorial(n - i - 1);
+                        }
+                        return rank;
+                    }
+
+                    // 生成x!
+                    long long factorial(int x) {
+                        long long f = 1;
+                        for (int i = 2; i <= x; ++i) f *= i;
+                        return f;
+                    }
+
+                2. 从 整数 --> 排列
+                    // 都会利用到factor函数，所以得提前写上
+                    vector<int> invCantor(long long rank, int n) {
+                        vector<int> a(n), used(n, 0);
+                        for (int i = 0; i < n; ++i) {
+                            long long fact = factorial(n - i - 1);
+                            int cnt = rank / fact;
+                            rank %= fact;
+                            for (int j = 0; j < n; ++j) {
+                                if (!used[j] && cnt-- == 0) {
+                                    a[i] = j + 1;  // 1-based
+                                    used[j] = 1;
+                                    break;
+                                }
+                            }
+                        }
+                        return a;
+                    }
+
+                时间复杂度： O(n^2) n是排列位数
+
+            什么时候用?
+                只要总共数据有n!个， 且相互独立（如同排列一般）， 【索引由排列构成】就可以用
+
+            还有优化版本， Fenwick 树（BIT）优化
+                代码：
+
+
+                时间复杂度： O(nlogn) n是排列位数
+
+            选择版本：
+                n <= 8
+                    用法一
+                n >= 12
+                    用法二
+
+
+
+
+
+
+
+
+
