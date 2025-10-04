@@ -1,0 +1,53 @@
+核心思想：
+    动态规划：逐步允许 0…k 作为中间点
+
+松弛顺序：
+    最外层 k 是阶段，i、j 无序
+
+时间复杂度：
+    Θ(n³)
+
+空间复杂度：
+    Θ(n²)
+
+负权边：
+    支持
+
+顶点规模：
+	n≤500 稳妥；n≤1000 勉强；n>3000 勿用
+
+负环检测：
+	// 初始对角线 d[i][i]=0
+    // 跑完 Floyd 后
+    for (int i = 0; i < n; ++i)
+        if (d[i][i] < 0) {          // 找到负环
+            cout << "NEGATIVE CYCLE\n";
+            return;
+        }
+
+路径还原：
+	int nxt[N][N] = {0};
+    // 初始化
+    for (int i = 0; i < n; ++i)
+    for (int j = 0; j < n; ++j)
+        nxt[i][j] = j;               // 直接后继
+
+    // 在 Floyd 松弛时同步更新
+    if (d[i][k] + d[k][j] < d[i][j]) {
+        d[i][j] = d[i][k] + d[k][j];
+        nxt[i][j] = nxt[i][k];
+    }
+
+    // 打印路径
+    void printPath(int i, int j) {
+        if (d[i][j] == INF) { cout << "NO PATH\n"; return; }
+        for (int cur = i; cur != j; cur = nxt[cur][j])
+            cout << cur << ' ';
+        cout << j << '\n';
+    }
+
+
+
+
+
+
