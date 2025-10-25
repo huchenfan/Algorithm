@@ -8,7 +8,7 @@ void merge(int arr[], int l, int mid, int r) {
     int i = l;
     int j = mid +1;
     int k = 0;
-    int tmp[r-l+1];
+    int* tmp = new int[r-l+1];  // 防止大数据时报错
     while(i <= mid && j <= r) {
         tmp[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
     }
@@ -22,6 +22,8 @@ void merge(int arr[], int l, int mid, int r) {
     for(int t = l, s = 0; t <= r; t++, s++) {
         arr[t] = tmp[s];
     }
+    delete tmp;
+    tmp = nullptr;
 }
 
 void mergeSort(int arr[], int l, int r) {
