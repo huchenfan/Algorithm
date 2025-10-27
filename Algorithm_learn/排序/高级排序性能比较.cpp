@@ -7,7 +7,7 @@ void insertSort(int arr[], int l, int r) {
     for(int i = l + 1; i < r; i++) {
         int val = arr[i];
         int j = i - 1;
-        for(; j >= 0; j--) {
+        for(; j >= l; j--) {
             if(val >= arr[j]) {
                 break;
             }
@@ -54,7 +54,7 @@ int partSort(int arr[], int l, int r) {
 
 void quickSort(int arr[], int l, int r) {
     if(l >= r) return;
-    if((r-l) <= 15) {
+    if((r-l) <= 32) {
         insertSort(arr, l, r);
         return;
     }
@@ -97,43 +97,45 @@ void heapSort(int arr[], int size) {
 }
 
 
-void merge(int arr[], int l, int mid, int r) {
+void merge(int arr[], int l, int mid, int r, int* p) {
     int i = l;
     int j = mid +1;
     int k = 0;
-    int* tmp = new int[r-l+1];
     while(i <= mid && j <= r) {
-        tmp[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
+        p[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
     }
     while(i <= mid) {
-        tmp[k++] = arr[i++];
+        p[k++] = arr[i++];
     }
     while(j <= r) {
-        tmp[k++] = arr[j++];
+        p[k++] = arr[j++];
     }
 
     for(int t = l, s = 0; t <= r; t++, s++) {
-        arr[t] = tmp[s];
+        arr[t] = p[s];
     }
-    delete []tmp;
-    tmp = nullptr;
 }
 
-void mergeSort(int arr[], int l, int r) {
-    if(l >= r) return;
+void mergeSort(int arr[], int l, int r, int* p) {
+    if(r - l + 1 <= 32) {
+        insertSort(arr, l, r);
+        return;
+    }
     int mid = (l + r ) / 2;
-    mergeSort(arr, l, mid);
-    mergeSort(arr, mid+1, r);
-    merge(arr, l, mid, r);
+    mergeSort(arr, l, mid, p);
+    mergeSort(arr, mid+1, r, p);
+    merge(arr, l, mid, r, p);
 }
 
 void mergeSort(int arr[], int size) {
-    mergeSort(arr, 0, size - 1);
+    int* p = new int[size];
+    mergeSort(arr, 0, size - 1, p);
+    delete []p;
 }
 
 
 int main() {
-    const int COUNT = 1000000;
+    const int COUNT = 100000000;
     int* arr = new int[COUNT];
     int* brr = new int[COUNT];
     int* crr = new int[COUNT];
