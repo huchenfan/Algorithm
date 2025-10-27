@@ -11,7 +11,7 @@ struct Node {
 };
 
 void Joseph(Node *&head, int k, int m) {
-    if (head) return;
+    if (!head) return;
     Node *h = head;
     Node *t = head;
     while (k-- > 1) {

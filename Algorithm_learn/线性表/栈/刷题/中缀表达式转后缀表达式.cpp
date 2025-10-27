@@ -49,7 +49,7 @@ vector<string> mtoE(string &str) {
     for (int i = 0; i < str.size(); i++) {
         char ch = str[i];
         if (ch == ' ') {
-            str[i] = str[i-1];  // 类似于 去空格
+            str[i] = '@';  // 类似于 去空格
             continue;
         }
         if (isdigit(ch)) {
@@ -62,7 +62,7 @@ vector<string> mtoE(string &str) {
                 num.clear();
             }
         }
-        if(ch == '-' && (i == 0 || !isdigit(str[i-1]))) continue;  // 为了可以记录 负数
+        if(ch == '-' && (i == 0 || (!isdigit(str[i-1])&& isdigit(str[i+1])))) continue;  // 为了可以记录 负数
         if (ch == '(' || stack.empty()) {
             stack.push(ch);
             continue;
@@ -96,7 +96,7 @@ vector<string> mtoE(string &str) {
 }
 
 int main() {
-    string str = "((10 * (6 / ((9 + 3) * -11))) + 17) + 5";
+    string str = "(4 - 1 * 5) + 6";
     vector<string> s = mtoE(str);
     for (const string &ele: s) {
         cout << '"' << ele << '"' <<" ";

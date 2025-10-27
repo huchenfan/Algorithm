@@ -14,8 +14,7 @@ public:
     explicit Clink() {
         head = new Node();
         tail = head;
-        head->next = tail;
-        tail->next = head;
+        head->next = head;
     }
 
     ~Clink() {

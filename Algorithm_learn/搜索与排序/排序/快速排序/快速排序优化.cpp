@@ -5,10 +5,10 @@
 using namespace std;
 
 void insertSort(int arr[], int l, int r) {
-    for(int i = l + 1; i < r; i++) {
+    for(int i = l + 1; i <= r; i++) {
         int val = arr[i];
         int j = i - 1;
-        for(; j >= 0; j--) {
+        for(; j >= l; j--) {
             if(val >= arr[j]) {
                 break;
             }
@@ -54,8 +54,7 @@ int partSort(int arr[], int l, int r) {
 }
 
 void quickSort(int arr[], int l, int r) {
-    if(l >= r) return;
-    if((r-l) <= 15) {
+    if((r-l) <= 16) {
         insertSort(arr, l, r);
         return;
     }
