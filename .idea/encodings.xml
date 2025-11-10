@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/LU.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/test_.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/五大算法思想/回溯思想/刷题/02.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/倒排索引/倒排索引轻量化实现.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/哈夫曼树与哈夫曼索引/哈夫曼树与哈夫曼索引.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/哈夫曼树与哈夫曼索引/转为字节流.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Algorithm_learn/图论/最短路径/全源最短路径/Floyd/Floyd算法.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/树/ B树/B树代码实现/B树代码实现.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/树/ B树/B树代码实现/test.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Algorithm_learn/树/二叉树/红黑树/test.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Algorithm_learn/线性表/链表/刷题/单链表/单链表有序合并.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/codeforce/0917/B. Discounts/test01.cpp" charset="GBK" />
   </component>

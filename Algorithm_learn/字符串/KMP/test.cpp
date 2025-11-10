@@ -1,49 +1,61 @@
-#include <bits/stdc++.h>
+#include<iostream>
+#include<string>
 
-#include <utility>
 using namespace std;
 
-
-vector<int> getNext(string str) {
-    // 求next 数组， 原理 ： 根据前面得经验来指导后面的匹配
-    vector<int> next(str.size());
+int *getNext(string& str) {
+    int* next = new int[str.size()];
     int j = 0;
-    next[0] = 0;
-    for(int i = 1; i < str.size(); i++) {
-        while(j > 0 && str[j] != str[i]) {
-            j = next[j - 1];
+    int k = -1;
+    next[j] = k;
+    int size = str.size();
+    while(j < size-1) {
+        if(k == -1 || str[j] == str[k]) {
+            j++; k++;
+
+            if(str[j] == str[k]) {    // 算法优化
+                next[j] = next[k];
+            }
+            else {
+                next[j] = k;
+            }
         }
-        if(str[j] = str[i]) {
-            j++;
+        else {
+            k = next[k];
         }
-        next[i] = j;
     }
+
     return next;
 }
 
+int KMP(const string& s, string& t) {
+    int i = 0;
+    int j = 0;
+    int* next = getNext(t);
 
-int search(string &string1, string &string2) {
-    if(string2.empty()) return -1;
-    vector<int> next = getNext(string2);
-    for(int i = 0, j = 0; i < string1.size(); i++) {
-        while(j > 0 && string2[j]!= string1[i]) {
-            j = next[j - 1];
+    int size1 = s.size(); int size2 = t.size();     // 为什么要这样写？ 如果不用这个直接用 j 与 t.size() 比较，会有隐藏Bug, t.size() 是无符号类型，而 j 可能是 -1， 会进行隐式转换成无符号比较
+    while(i < size1 && j < size2) {
+        if(j == -1 || s[i] == t[j]) {
+            i++; j++;
         }
-        if(string1[i] == string2[j]) {
-            j++;
+        else {
+            j = next[j];
         }
-        if(j == string2.size()) {
-            return i - j + 1;
-        }
+    }
+
+    delete []next;
+
+    if(j == size2) {
+        return i - j;
     }
     return -1;
 }
 
-
 int main() {
-    string str1 = "aabaabaaf";
-    string str2 = "aabaaf";
-    cout << search(str1, str2)  << endl;
+    string s = "ABDCCCDABEFDSG";
+    string t = "CCD";
+    int pos = KMP(s, t);
+    cout << pos << endl;
     return 0;
 }
 

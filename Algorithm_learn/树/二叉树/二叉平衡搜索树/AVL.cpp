@@ -58,6 +58,7 @@ private:
 
         updateHeight(node);
         updateHeight(child);
+        return child;
     }
 
     // 处理右右情况
@@ -69,6 +70,7 @@ private:
 
         updateHeight(node);
         updateHeight(child);
+        return child;
     }
 
     // 处理右左情况
@@ -88,8 +90,6 @@ private:
     // 统一平衡操作：检查并执行旋转，同时更新高度
     Node* balance(Node* node)
     {
-        if (node == nullptr) return nullptr;
-
         updateHeight(node);
         int balanceFactor = getBalanceFactor(node);
 
@@ -145,16 +145,16 @@ private:
             }
 
             // 情况2：有两个孩子，左子树高用前驱节点，右子树高用后继节点
-            Node* succ;
+            Node* tmp;
             if(getHeight(node->left) > getHeight(node->right)){
-                succ = findMax(node->left);
-                node->data = succ->data;
-                node->left = remove(node->left, succ->data);
+                tmp = findMax(node->left);
+                node->data = tmp->data;
+                node->left = remove(node->left, tmp->data);
             }
             else{
-                succ = findMin(node->right);
-                node->data = succ->data;
-                node->right = remove(node->right, succ->data);
+                tmp = findMin(node->right);
+                node->data = tmp->data;
+                node->right = remove(node->right, tmp->data);
             }
         }
         else if (val < node->data) {
